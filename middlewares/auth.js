@@ -1,0 +1,29 @@
+let JWT = require('jsonwebtoken')
+
+let auth=(req,res,next)=>{
+    try{
+        let token = req.headers["autherization"].split(" ")[1]
+        JWT.verify(token,process.env.JWT_SECRET,(error,decoded)=>{
+            if(error){
+                return res.status(201).send({
+                    success:false,
+                    message:"Un-Autherized user"
+                })
+            }else{
+                console.log(decoded);
+                req.body.id=decoded.id
+                console.log(req.body);
+                next()
+            }
+        })
+    
+    }catch(error){
+        res.status(500).send({
+            success:true,
+            message:"please provide token",
+            error
+        })
+    }
+}
+
+module.exports = auth
