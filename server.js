@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 
 const mongodb = require('./config/db');
 const Router = require('./routes/AuthRoute');
+const resturentRoute = require('./routes/resturentRoutes');
 
 //^env configuration
 dotenv.config()
@@ -24,6 +25,8 @@ app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
 app.use('/api/v1',Router)
+app.use('/api/v1/resturent',resturentRoute)
+app.use('/api/v1/category',resturentRoute)
 
 
 let PORT = process.env.PORT || 5000

@@ -1,8 +1,10 @@
 let JWT = require('jsonwebtoken')
 
 let auth=(req,res,next)=>{
+    console.log("this is token",req.headers);
     try{
-        let token = req.headers["autherization"].split(" ")[1]
+        let token = req.headers["authorization"].split(" ")[1]
+        console.log("this is token inner ",token);
         JWT.verify(token,process.env.JWT_SECRET,(error,decoded)=>{
             if(error){
                 return res.status(201).send({
@@ -19,7 +21,7 @@ let auth=(req,res,next)=>{
     
     }catch(error){
         res.status(500).send({
-            success:true,
+            success:false,
             message:"please provide token",
             error
         })

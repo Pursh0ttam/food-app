@@ -9,10 +9,9 @@ let JWT = require('jsonwebtoken')
 
 
 let registrationController = async (req, res) => {
-    console.log(req.body);
     try {
-        let { userName, password, Email, address, phone } = req.body
-        if (!userName || !password || !Email || !address || !phone) {
+        let { userName, password, Email, address, phone, answer } = req.body
+        if (!userName || !password || !Email || !address || !phone || !answer) {
             return res.status(500).send("All inpuput fileds are required")
         }
         //check user
@@ -60,7 +59,8 @@ let loginController = async (req, res) => {
     // let valid = await dcryption(password, hashpassword)
 
     //^2nd way dcryption
-    let valid = bcrypt.compare(password, hashpassword)
+    let valid = await bcrypt.compare(password, hashpassword)
+    console.log(valid);
 
     if (!valid) {
         return res.status(500).send({
@@ -69,12 +69,12 @@ let loginController = async (req, res) => {
         })
     }
     //^ token creation
-    let token = JWT.sign({id:Userdata._id},process.env.JWT_SECRET,{expiresIn:'1h'})
+    let token = JWT.sign({ id: Userdata._id }, process.env.JWT_SECRET, { expiresIn: '6h' })
 
     Userdata.password = undefined
     res.status(200).send({
         success: true,
-        message: "login succesfull",token, Userdata,
+        message: "login succesfull", token, Userdata,
     })
 
 
