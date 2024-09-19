@@ -47,4 +47,4 @@ let resturentSchema = new Schema({
     },
 }, { timestamps: true });
 
-module.exports = mongoose.model("Resturant", resturentSchema)
+module.exports = mongoose.model("resturent", resturentSchema)

@@ -8,6 +8,8 @@ const dotenv = require('dotenv');
 const mongodb = require('./config/db');
 const Router = require('./routes/AuthRoute');
 const resturentRoute = require('./routes/resturentRoutes');
+const foodRout = require('./routes/foodsRoutes.js');
+
 
 //^env configuration
 dotenv.config()
@@ -24,9 +26,10 @@ let app = express()
 app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
-app.use('/api/v1',Router)
-app.use('/api/v1/resturent',resturentRoute)
-app.use('/api/v1/category',resturentRoute)
+app.use('/api/v1', Router)
+app.use('/api/v1/resturent', resturentRoute)
+app.use('/api/v1/category', resturentRoute)
+app.use('/api/v1/foods', foodRout)
 
 
 let PORT = process.env.PORT || 5000

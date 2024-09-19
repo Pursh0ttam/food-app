@@ -1,4 +1,4 @@
-const resturentModel = require("../model/resturantSchema")
+const resturentModel = require("../model/resturentSchema")
 
 
 const createResto = async (req, res) => {
@@ -11,8 +11,8 @@ const createResto = async (req, res) => {
                 message: "title and coodrs are mendatory"
             })
         }
-        let newResturent = new resturentModel({ ...values })
-        await newResturent.save()
+        let newresturent = new resturentModel({ ...values })
+        await newresturent.save()
         res.status(201).send({
             success: true,
             message: "new user created successfully"
@@ -49,7 +49,7 @@ const getAllresturent = async (req, res) => {
     }
 }
 
-const getResturentById = async (req, res) => {
+const getresturentById = async (req, res) => {
     console.log(req.params.id);
     try {
         let restroId = req.params.id
@@ -68,7 +68,7 @@ const getResturentById = async (req, res) => {
         }
         return res.status(200).send({
             success: true,
-            message: "Resturent founded", resturent
+            message: "resturent founded", resturent
         })
 
     } catch (error) {
@@ -79,7 +79,7 @@ const getResturentById = async (req, res) => {
     }
 }
 
-const deleteResturent = async (req, res) => {
+const deleteresturent = async (req, res) => {
     try {
         let restroId = req.params.id
         if (!restroId) {
@@ -96,7 +96,7 @@ const deleteResturent = async (req, res) => {
                 message: "resturent not deleted due to wrong resturent id"
             })
         }
-        
+
         return res.status(200).send({
             success: true,
             message: "restro deleted successfully",
@@ -115,4 +115,4 @@ const deleteResturent = async (req, res) => {
 
 
 
-module.exports = { createResto, getAllresturent, getResturentById, deleteResturent }
+module.exports = { createResto, getAllresturent, getresturentById, deleteresturent }
